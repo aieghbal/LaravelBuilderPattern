@@ -2,6 +2,21 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Patterns\Builder\PDFReportBuilder;
+use App\Patterns\Builder\HTMLReportBuilder;
+use App\Patterns\Builder\ReportDirector;
+
+Route::get('/builder-demo', function () {
+    $director = new ReportDirector();
+
+    $pdfReport = $director->buildFullReport(new PDFReportBuilder());
+    $htmlReport = $director->buildSimpleReport(new HTMLReportBuilder());
+
+    return response()->json([
+        'pdf' => $pdfReport->show(),
+        'html' => $htmlReport->show(),
+    ]);
+});
 
 Route::get('/', function () {
     return view('welcome');
