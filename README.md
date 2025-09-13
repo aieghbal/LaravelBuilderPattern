@@ -1,20 +1,19 @@
-# Builder Pattern در لاراول
+# Builder Pattern in Laravel
 
-## 📖 مقدمه
+## 📖 Introduction
 
-الگوی طراحی **Builder** یکی از پرکاربردترین الگوهای طراحی (Design Patterns) در دسته‌ی **Creational** است. این الگو زمانی استفاده می‌شود که می‌خواهیم یک آبجکت پیچیده را مرحله به مرحله بسازیم.
+The Builder design pattern is one of the most commonly used Creational design patterns. This pattern is used when you want to construct a complex object step by step.
 
-در این مثال، ما یک **سیستم تولید گزارش (Report Generator)** در لاراول طراحی می‌کنیم. هر گزارش می‌تواند بخش‌های مختلفی مثل:
+In this example, we design a Report Generator system in Laravel. Each report can have various sections such as:
+Title
+Data
+Chart
 
-* عنوان (Title)
-* داده‌ها (Data)
-* نمودار (Chart)
-
-داشته باشد. اما همه‌ی گزارش‌ها الزاما همه‌ی بخش‌ها را ندارند. اینجا **Builder Pattern** کمک می‌کند بخش به بخش گزارش ساخته شود.
+Not all reports necessarily include all sections. Here, the Builder Pattern helps us construct the report piece by piece.
 
 ---
 
-## 📂 ساختار پوشه‌ها
+## 📂 Folder Structure
 
 ```
 app/
@@ -29,7 +28,7 @@ app/
 
 ---
 
-## 1. کلاس Product (گزارش نهایی)
+## 1. Product Class (Final Report)
 
 ```php
 <?php
@@ -55,7 +54,7 @@ class Report
 
 ---
 
-## 2. اینترفیس Builder
+## 2. Builder Interface
 
 ```php
 <?php
@@ -73,7 +72,7 @@ interface ReportBuilder
 
 ---
 
-## 3. یک Concrete Builder برای PDF
+## 3. A Concrete Builder for PDF
 
 ```php
 <?php
@@ -116,7 +115,7 @@ class PDFReportBuilder implements ReportBuilder
 
 ---
 
-## 4. یک Concrete Builder برای HTML
+## 4. A Concrete Builder for HTML
 
 ```php
 <?php
@@ -159,7 +158,7 @@ class HTMLReportBuilder implements ReportBuilder
 
 ---
 
-## 5. Director (مدیر ساخت)
+## 5. Director
 
 ```php
 <?php
@@ -189,9 +188,9 @@ class ReportDirector
 
 ---
 
-## 6. تست در Controller (یا Route)
+## 66. Test in Controller (or Route)
 
-در `routes/web.php` این کد را اضافه کنید:
+Add this code to routes/web.php:
 
 ```php
 use App\Patterns\Builder\PDFReportBuilder;
@@ -213,9 +212,9 @@ Route::get('/builder-demo', function () {
 
 ---
 
-## 🎯 خروجی نهایی
+## 🎯 Final Output
 
-وقتی به `/builder-demo` بروید:
+When you visit /builder-demo:
 
 ```json
 {
@@ -234,12 +233,15 @@ Route::get('/builder-demo', function () {
 
 ---
 
-## ✅ نتیجه‌گیری
+## ✅ Conclusion
 
-با استفاده از **Builder Pattern** توانستیم:
+By using the Builder Pattern, we were able to:
 
-* بخش به بخش یک آبجکت پیچیده (Report) را بسازیم.
-* چندین شکل مختلف (PDF و HTML) از یک گزارش تولید کنیم.
-* کد تمیز و منعطف داشته باشیم.
+Build a complex object (Report) step by step.
 
-> این الگو مخصوصا وقتی مفید است که بخواهید یک آبجکت را با **تنظیمات و حالات مختلف** بسازید.
+Produce multiple formats (PDF and HTML) of the same report.
+
+Keep the code clean and flexible.
+
+This pattern is especially useful when you need to construct an object with various configurations and states.
+📄 [نسخه فارسی](./README.fa.md)
